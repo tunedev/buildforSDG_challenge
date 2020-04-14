@@ -36,10 +36,11 @@ const addDollarInFlight = (data, object) => {
 const addHospitalBedsByRequestedTime = (data, object) => {
   const { totalHospitalBeds } = data;
   const { severeCasesByRequestedTime } = object;
-  const averageAvailableBed = Math.trunc(totalHospitalBeds * 0.35);
+  const averageAvailableBed = totalHospitalBeds * 0.35;
 
-  object.hospitalBedsByRequestedTime =
-    averageAvailableBed + 1 - severeCasesByRequestedTime;
+  object.hospitalBedsByRequestedTime = Math.trunc(
+    averageAvailableBed - severeCasesByRequestedTime
+  );
 };
 
 const addInfectionsByRequestedTime = (durationInfo, object) => {
@@ -78,12 +79,6 @@ const covid19ImpactEstimator = (data) => {
 
   addDollarInFlight(data, impact);
   addDollarInFlight(data, severeImpact);
-
-  console.log({
-    data,
-    impact,
-    severeImpact
-  });
 
   return {
     data,
