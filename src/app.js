@@ -14,7 +14,7 @@ dotenv.config();
 app.use(cors());
 app.use(logger('dev'));
 app.use(
-  logger(':method\t\t:url\t\t:status\t\t:response-time[0] ms', {
+  logger(':method\t\t:url\t\t:status\t\t0:response-time[0] ms', {
     stream: fs.createWriteStream('./log.txt', { flags: 'w+' })
   })
 );
